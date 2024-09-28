@@ -1,11 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from "@deepgram/sdk";
-import multer from 'multer';
 import zlib from 'zlib';
-
-// Setup multer to handle file uploads
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
 
 // POST handler for the API route
 export async function POST(req: NextRequest) {
@@ -49,10 +44,3 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Failed to upload and process audio' }, { status: 500 });
   }
 }
-
-// Ensure the POST handler uses multer to handle the file uploads
-export const config = {
-  api: {
-    bodyParser: false, // Disable Next.js bodyParser to handle formData/multipart via multer
-  },
-};
